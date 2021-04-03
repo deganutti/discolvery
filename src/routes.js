@@ -13,9 +13,6 @@ const profile = {
 }
 
 
-
-
-
 routes.get('/', (req, res) => {
     return res.render(views + '/index');
 });
@@ -23,6 +20,15 @@ routes.get('/', (req, res) => {
 routes.get('/job', (req, res) => {
     return res.render(views + '/job');
 });
+
+
+/**
+ * Novo novo method post do http
+ */
+routes.post('/job', (req, res) => {
+    return res.render(views + '/job');
+});
+
 routes.get('/job-edit', (req, res) => {
     return res.render(views + '/job-edit');
 });
