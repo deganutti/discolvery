@@ -18,7 +18,9 @@
     <link rel="stylesheet" href="./styles/pages/index.css" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
 
 
 </head>
@@ -30,12 +32,13 @@
                 <h2 class="sr-only">Homepage</h2>
                 <img id="logo" src="./images/logo.svg" alt="Logo" />
                 <span id="notification">
-          <img src="./images/alert-octagon.svg" alt="Alerta" />
-          Você tem 2 horas livres no seu dia
-        </span>
+                    <img src="./images/alert-octagon.svg" alt="Alerta" />
+                    Você tem 2 horas livres no seu dia
+                </span>
                 <a href="/profile" id="avatar-profile">
                     <p>Jakeliny <span>Ver perfil</span></p>
-                    <img src="https://avatars.githubusercontent.com/u/17316392?s=460&u=6912a91a70bc89745a2079fdcdad3bc3ce370f13&v=4" />
+                    <img
+                        src="https://avatars.githubusercontent.com/u/17316392?s=460&u=6912a91a70bc89745a2079fdcdad3bc3ce370f13&v=4" />
                 </a>
             </section>
 
@@ -57,8 +60,8 @@
                 </div>
                 <a class="button orange" href="/job">
                     <span>
-            <img src="./images/plus-24.svg" alt="Novo Job" />
-          </span> Adicionar novo job
+                        <img src="./images/plus-24.svg" alt="Novo Job" />
+                    </span> Adicionar novo job
                 </a>
             </section>
         </div>
@@ -69,49 +72,31 @@
             <h1 class="sr-only">Trabalhos</h1>
 
             <div class="cards">
-                <div class="card progress" data-id="1">
-                    <div class="id column">1</div>
-                    <div class="name column">
-                        Pizzaria Guloso
-                    </div>
-                    <div class="deadline column">
-                        <span>Prazo</span>
-                        <p>3 dias para a entrega</p>
-                    </div>
-                    <div class="amount column">
-                        <span>Valor</span>
-                        <p>R$ 4500,00</p>
-                    </div>
-                    <div class="status badge column">
-                        Em andamento
-                    </div>
-                    <div class="actions column flex">
-                        <p class="sr-only">Ações</p>
-                        <a href="/job-edit" class="button white edit" title="Editar Job">
-                            <img src="./images/edit-24.svg" alt="Editar Job" />
-                        </a>
-                        <button class="delete button white" title="Excluir Job">
-              <img src="./images/trash-24.svg" alt="Excluir Job" />
-            </button>
-                    </div>
-                </div>
-                <!-- end card -->
+                <% jobs.forEach(jobItem=> {  %>
 
-                <div class="card done" data-id="2">
-                    <div class="id column">2</div>
+                    
+                <div class="card <%= jobItem['status'] %> " data-id="<%= jobItem['id'] %>">
+                    <div class="id column"><%= jobItem['id'] %></div>
                     <div class="name column">
-                        OneTwo Project
+                        <%= jobItem['name'] %>
+                            
                     </div>
                     <div class="deadline column">
                         <span>Prazo</span>
-                        <p>3 dias para a entrega</p>
+                        <p>
+                            <% if(jobItem['status'] === 'done') {%>
+                                Prazo encerrado
+                            <% }  else { %>  
+                                <%= jobItem['remaining'] %> dias para a entrega 
+                            <% }  %>
+                        </p>
                     </div>
                     <div class="amount column">
                         <span>Valor</span>
-                        <p>R$ 4500,00</p>
+                        <p>R$ <%= jobItem['budget'].toFixed(2).replace('.',',') %></p>
                     </div>
                     <div class="status badge column">
-                        Encerrado
+                       <%= jobItem['status'] === 'done' ? 'Encerrado' : 'Em Andamento'   %> 
                     </div>
                     <div class="actions column flex">
                         <p class="sr-only">Ações</p>
@@ -119,10 +104,14 @@
                             <img src="./images/edit-24.svg" alt="Editar Job" />
                         </a>
                         <button class="delete button white" title="Excluir Job">
-                          <img src="./images/trash-24.svg" alt="Excluir Job" />
+                            <img src="./images/trash-24.svg" alt="Excluir Job" />
                         </button>
                     </div>
                 </div>
+                <% }); %>
+                <!-- end card -->
+
+                
             </div>
             <!-- end cards -->
         </main>
@@ -134,11 +123,11 @@
             <img src="./images/trash-48.svg" alt="Excluir Job" title="Excluir Job" />
             <h3>Excluir Job</h3>
             <p>Quer mesmo excluir esse job? <br /> Ele será apagado para sempre.
-                <p>
-                    <footer>
-                        <a class="button gray" href="#">Cancelar</a>
-                        <button class="button red" type="submit" form="delete-job">Excluir Job</button>
-                    </footer>
+            <p>
+            <footer>
+                <a class="button gray" href="#">Cancelar</a>
+                <button class="button red" type="submit" form="delete-job">Excluir Job</button>
+            </footer>
         </div>
         <form method="post" action="/job/delete" id="delete-job"></form>
     </div>
