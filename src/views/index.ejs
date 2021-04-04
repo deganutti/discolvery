@@ -9,13 +9,16 @@
     <link rel="shortcut icon" href="images/favicon.png" type="image/png" />
     <title>JobsCalc</title>
 
-    <link rel="stylesheet" href="./styles/main.css" />
-    <link rel="stylesheet" href="./styles/partials/page-header.css" />
-    <link rel="stylesheet" href="./styles/partials/cards.css" />
-    <link rel="stylesheet" href="./styles/partials/buttons.css" />
-    <link rel="stylesheet" href="./styles/partials/modal.css" />
-    <link rel="stylesheet" href="./styles/partials/animations.css" />
-    <link rel="stylesheet" href="./styles/pages/index.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/partials/page-header.css" />
+    <link rel="stylesheet" href="/styles/partials/cards.css" />
+    <link rel="stylesheet" href="/styles/partials/buttons.css" />
+    <link rel="stylesheet" href="/styles/partials/modal.css" />
+    <link rel="stylesheet" href="/styles/partials/animations.css" />
+    <link rel="stylesheet" href="/styles/pages/index.css" />
+
+    <script type="module" src="/scripts/index.js"></script>
+
 
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link
@@ -87,7 +90,7 @@
                             <% if(jobItem['status'] === 'done') {%>
                                 Prazo encerrado
                             <% }  else { %>  
-                                <%= jobItem['remaining'] %> dias para a entrega 
+                                <%= Number(jobItem['remaining']) %> dias para a entrega 
                             <% }  %>
                         </p>
                     </div>
@@ -100,10 +103,10 @@
                     </div>
                     <div class="actions column flex">
                         <p class="sr-only">Ações</p>
-                        <a href="/job-edit" class="button white edit" title="Editar Job">
+                        <a href="/job/<%= jobItem['id'] %> " class="button white edit" title="Editar Job">
                             <img src="./images/edit-24.svg" alt="Editar Job" />
                         </a>
-                        <button class="delete button white" title="Excluir Job">
+                        <button  class="delete button white" title="Excluir Job">
                             <img src="./images/trash-24.svg" alt="Excluir Job" />
                         </button>
                     </div>
@@ -129,7 +132,7 @@
                 <button class="button red" type="submit" form="delete-job">Excluir Job</button>
             </footer>
         </div>
-        <form method="post" action="/job/delete" id="delete-job"></form>
+        <form method="post" action="/job/ " id="delete-job"></form>
     </div>
     <!-- end modal-wrapper -->
 </body>
