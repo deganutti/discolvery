@@ -2,8 +2,9 @@ const express = require('express');
 const routes = express.Router();
 const ProfileController = require('./controllers/ProfileController');
 const JobController = require('./controllers/JobController');
+const DashBoardController = require('./controllers/DashboardController');
 
-routes.get('/', JobController.index);
+routes.get('/', DashBoardController.index);
 /**
  * Novo novo method post do http
  */

@@ -36,12 +36,13 @@
                 <img id="logo" src="./images/logo.svg" alt="Logo" />
                 <span id="notification">
                     <img src="./images/alert-octagon.svg" alt="Alerta" />
-                    Você tem 2 horas livres no seu dia
+                    Você tem <%= freeHours %>  horas livres no seu dia
                 </span>
                 <a href="/profile" id="avatar-profile">
-                    <p>Jakeliny <span>Ver perfil</span></p>
-                    <img
-                        src="https://avatars.githubusercontent.com/u/17316392?s=460&u=6912a91a70bc89745a2079fdcdad3bc3ce370f13&v=4" />
+                    <p>
+                        <%= profile['name'] %><span>Ver perfil</span>
+                    </p>
+                    <img src="<%= profile['avatar'] %>" />
                 </a>
             </section>
 
@@ -52,13 +53,15 @@
 
                 <div class="info">
                     <div class="total">
-                        <strong>12</strong> Projetos ao total
+                        <strong>
+                            <%= statusCounts['total'] %>
+                        </strong> Projetos ao total
                     </div>
                     <div class="in-progress">
-                        <strong>7</strong> Em andamento
+                        <strong><%= statusCounts['progress'] %></strong> Em andamento
                     </div>
                     <div class="finished">
-                        <strong>4</strong> Encerrados
+                        <strong><%= statusCounts['done'] %></strong> Encerrados
                     </div>
                 </div>
                 <a class="button orange" href="/job">
@@ -75,46 +78,49 @@
             <h1 class="sr-only">Trabalhos</h1>
 
             <div class="cards">
-                <% jobs.forEach(jobItem=> {  %>
+                <% jobs.forEach(jobItem=> { %>
 
-                    
-                <div class="card <%= jobItem['status'] %> " data-id="<%= jobItem['id'] %>">
-                    <div class="id column"><%= jobItem['id'] %></div>
-                    <div class="name column">
-                        <%= jobItem['name'] %>
-                            
-                    </div>
-                    <div class="deadline column">
-                        <span>Prazo</span>
-                        <p>
-                            <% if(jobItem['status'] === 'done') {%>
-                                Prazo encerrado
-                            <% }  else { %>  
-                                <%= Number(jobItem['remaining']) %> dias para a entrega 
-                            <% }  %>
-                        </p>
-                    </div>
-                    <div class="amount column">
-                        <span>Valor</span>
-                        <p>R$ <%= jobItem['budget'].toFixed(2).replace('.',',') %></p>
-                    </div>
-                    <div class="status badge column">
-                       <%= jobItem['status'] === 'done' ? 'Encerrado' : 'Em Andamento'   %> 
-                    </div>
-                    <div class="actions column flex">
-                        <p class="sr-only">Ações</p>
-                        <a href="/job/<%= jobItem['id'] %> " class="button white edit" title="Editar Job">
-                            <img src="./images/edit-24.svg" alt="Editar Job" />
-                        </a>
-                        <button  class="delete button white" title="Excluir Job">
-                            <img src="./images/trash-24.svg" alt="Excluir Job" />
-                        </button>
-                    </div>
-                </div>
-                <% }); %>
-                <!-- end card -->
 
-                
+                    <div class="card <%= jobItem['status'] %> " data-id="<%= jobItem['id'] %>">
+                        <div class="id column">
+                            <%= jobItem['id'] %>
+                        </div>
+                        <div class="name column">
+                            <%= jobItem['name'] %>
+
+                        </div>
+                        <div class="deadline column">
+                            <span>Prazo</span>
+                            <p>
+                                <% if(jobItem['status']==='done' ) {%>
+                                    Prazo encerrado
+                                    <% } else { %>
+                                        <%= Number(jobItem['remaining']) %> dias para a entrega
+                                            <% } %>
+                            </p>
+                        </div>
+                        <div class="amount column">
+                            <span>Valor</span>
+                            <p>R$ <%= jobItem['budget'].toFixed(2).replace('.',',') %>
+                            </p>
+                        </div>
+                        <div class="status badge column">
+                            <%= jobItem['status']==='done' ? 'Encerrado' : 'Em Andamento' %>
+                        </div>
+                        <div class="actions column flex">
+                            <p class="sr-only">Ações</p>
+                            <a href="/job/<%= jobItem['id'] %> " class="button white edit" title="Editar Job">
+                                <img src="./images/edit-24.svg" alt="Editar Job" />
+                            </a>
+                            <button class="delete button white" title="Excluir Job">
+                                <img src="./images/trash-24.svg" alt="Excluir Job" />
+                            </button>
+                        </div>
+                    </div>
+                    <% }); %>
+                        <!-- end card -->
+
+
             </div>
             <!-- end cards -->
         </main>
