@@ -36,7 +36,12 @@
                 <img id="logo" src="./images/logo.svg" alt="Logo" />
                 <span id="notification">
                     <img src="./images/alert-octagon.svg" alt="Alerta" />
-                    Você tem <%= freeHours %>  horas livres no seu dia
+
+                    <% if (freeHours <=0){ %>
+                        Você não possui horas livres
+                        <% } else {%>
+                            Você tem <%= freeHours %> horas livres no seu dia
+                                <% } %>
                 </span>
                 <a href="/profile" id="avatar-profile">
                     <p>
@@ -58,10 +63,14 @@
                         </strong> Projetos ao total
                     </div>
                     <div class="in-progress">
-                        <strong><%= statusCounts['progress'] %></strong> Em andamento
+                        <strong>
+                            <%= statusCounts['progress'] %>
+                        </strong> Em andamento
                     </div>
                     <div class="finished">
-                        <strong><%= statusCounts['done'] %></strong> Encerrados
+                        <strong>
+                            <%= statusCounts['done'] %>
+                        </strong> Encerrados
                     </div>
                 </div>
                 <a class="button orange" href="/job">

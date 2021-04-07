@@ -22,6 +22,9 @@ let data=[
         update(newJob){
             data = newJob;
         },
+        create(newJob){
+            data.push(newJob);
+        },
         delete(oldJob){
             data = data.filter((job) => Number(job.id) !== Number(oldJob));
         }
